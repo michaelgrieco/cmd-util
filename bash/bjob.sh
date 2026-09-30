@@ -10,10 +10,10 @@ echo "Writing log to $out_file"
 shift
 BJOB_IN_FILE=${BJOB_IN_FILE:=./bjob.in}
 if [[ -f "$BJOB_IN_FILE" ]] && [[ -z "$BJOB_NO_INPUT" ]]; then
-  eval "$* < $BJOB_IN_FILE &> $out_file" &
+  eval "$* < $BJOB_IN_FILE &> $out_file &"
   procid=$!
 else
-  eval "$* &> $out_file" &
+  eval "$* &> $out_file &"
   procid=$!
 fi
 disown

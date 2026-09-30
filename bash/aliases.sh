@@ -3,6 +3,13 @@
 
 # general aliases
 alias pinfo='ps -Flww -p'
+alias mux='tmux new-session -A -s'
+alias muxl='tmux ls'
+alias muxls='tmux ls'
+alias pinfo='ps -Flww -p'
+alias rgrep='grep -Rns --color=auto'
+alias regrep='egrep -Rns --color=auto'
+alias find='find -L'
 
 # cmd-util scripts
 CMD_UTIL_HOME="${HOME}/bin/cmd-util"

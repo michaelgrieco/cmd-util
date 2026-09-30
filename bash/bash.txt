@@ -6,6 +6,10 @@ sudo passwd jane
 sudo usermod -aG sudo jane
 chsh jane -s /bin/bash
 
+# Safe shutdown
+sudo shutdown now
+sudo shutdown 06:00
+
 # File writing and scanning
 sed -I -e 's/PATTERN/REPLACEMENT/g' filepath*.txt
 find ../src -type f -iregex [.]*\/[^.]*\.c
@@ -44,23 +48,37 @@ for pe_y in "${pe_ys[@]}"; do
 # Ctrl-A d to exit
 
 # tmux
-#tmux new -t <tid>
-#tmux ls
-#tmux attach-session -t <tid>
-#tmux kill-session -t <tid>
+tmux new -t <tid>
+tmux ls
+tmux attach-session -t <tid>
+tmux kill-session -t <tid>
 # Ctrl-B % for a vertical split
 # Ctrl-B " for a horizontal split
 # Ctrl-B O to switch
 # Ctrl-B D to detach
 
 #Docker
-# docker cp foo.txt container_id:/foo.txt
-# docker run -it CONTAINER_ID
-# docker exec -it CONTAINER_ID bash
-# docker commit CONTAINER_ID IMAGE:IMAGE_TAG
+docker cp foo.txt container_id:/foo.txt
+docker run -it CONTAINER_ID
+docker exec -it CONTAINER_ID bash
+docker commit CONTAINER_ID IMAGE:IMAGE_TAG
 
 # git sync fork
-#  git remote add upstream https://github.com/whoever/whatever.git
-#  git fetch upstream
-#  git checkout <mybranch>
-#  git rebase upstream/<upstreambranch>
+git remote add upstream https://github.com/whoever/whatever.git
+git fetch upstream
+git checkout <mybranch>
+git rebase upstream/<upstreambranch>
+
+# git worktree
+git worktree list
+git worktree add -b new_branch_name ../tree_path base_branch
+git worktree remove ../tree_path
+# remove directory to delete worktree then execute the following
+git worktree prune
+
+# git branch management
+git checkout -b <mybranch>
+git push -u <remote> <mybranch>
+git branch -d <mybranch>
+git branch -D <mybranch>
+git push -d <remote> <mybranch>

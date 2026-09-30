@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define TAB_WIDTH 4
+#define TAB_WIDTH 2
 
 int main(int argc, char **argv) {
     if (argc < 2) {
@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
         tab_width = atoi(argv[2]);
         if (!tab_width) tab_width = TAB_WIDTH;
     }
+    printf("Tab width is %d\n", tab_width);
 
     // file names
     char *file_name = argv[1];
@@ -26,6 +27,10 @@ int main(int argc, char **argv) {
 
     // file pointers
     FILE *ifp = fopen(file_name, "r");
+    if (!ifp) {
+        printf("Could not find input file %s\n", file_name);
+        return 1;
+    }
     FILE *ofp = fopen(tmp_file_name, "w");
 
     // buffer

@@ -14,7 +14,7 @@ DEPS=$(wildcard *.h) $(wildcard ../include/*.h)
 SRCS=$(wildcard *.c)
 OBJS=$(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-all: $(BIN_DIR) $(OBJ_DIR) $(OBJS) fp
+all: $(BIN_DIR) $(OBJ_DIR) $(OBJS) fp trim_md_list_spacing
 
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
