@@ -107,6 +107,48 @@ function scps {
 }
 export function scps
 
+
+function mux {
+    if [ -z "$1" ]; then
+        tmux
+    elif [ "$1" == "ls" ]; then
+        mapfile -t sessions < <(tmux ls)
+
+        if [[ ${#sessions[@]} -eq 0 ]]; then
+            echo "No tmux sessions found."
+            return 1
+        fi
+
+        echo "Found ${#sessions[@]} session(s):"
+        echo ""
+        local i
+        for i in "${!sessions[@]}"; do
+            printf "  [%d] %s\n" "$((i + 1))" "${sessions[$i]}"
+        done
+        echo ""
+
+        local choice
+        read -rp "Select a session to open [1-${#sessions[@]}] (or session ID or q to quit): " choice
+        if [[ "$choice" == "q" || "$choice" == "Q" ]]; then
+            echo "Cancelled."
+            return 0
+        elif [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#sessions[@]} )); then
+            local selected="${sessions[$((choice - 1))]}"
+            tmux_id="${selected%%: *}"
+        else
+            tmux_id="$choice"
+        fi
+
+        echo ""
+        echo "Opening: ${tmux_id}"
+        echo ""
+        tmux attach-session -t $tmux_id
+    else
+        tmux new-session -A -s $1
+    fi
+}
+export function mux
+
 #########################
 ##### GIT FUNCTIONS #####
 #########################

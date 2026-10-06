@@ -57,11 +57,24 @@ tmux kill-session -t <tid>
 # Ctrl-B O to switch
 # Ctrl-B D to detach
 
+# Resolve IP address from domain name
+nslookup <DOMAIN>.com
+
+# Python/pip
+pip install [--no-deps] [--user] <PACKAGE_NAME>==<VERSION>
+pip show <PACKAGE_NAME>
+
 #Docker
 docker cp foo.txt container_id:/foo.txt
 docker run -it CONTAINER_ID
 docker exec -it CONTAINER_ID bash
 docker commit CONTAINER_ID IMAGE:IMAGE_TAG
+
+# git file endings
+git config --global core.autocrlf input
+# then from a clean tree to refresh all file endings
+git rm --cached -r .
+git reset --hard
 
 # git sync fork
 git remote add upstream https://github.com/whoever/whatever.git

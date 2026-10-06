@@ -3,23 +3,28 @@
 
 # general aliases
 alias pinfo='ps -Flww -p'
-alias mux='tmux new-session -A -s'
-alias muxl='tmux ls'
-alias muxls='tmux ls'
 alias pinfo='ps -Flww -p'
 alias rgrep='grep -Rns --color=auto'
 alias regrep='egrep -Rns --color=auto'
 alias find='find -L'
 
 # cmd-util scripts
-CMD_UTIL_HOME="${HOME}/bin/cmd-util"
 alias wd='${CMD_UTIL_HOME}/bash/wd.sh'
-#alias cwd='cd $(${CMD_UTIL_HOME}/bash/wd.sh echo)'
-alias cwd='$(command -v deactivate &> /dev/null) && deactivate; cd $(${CMD_UTIL_HOME}/bash/wd.sh echo); ( [ -f .venv/bin/activate ] && echo -n "Source .venv/bin/activate? [n|y] n: " && read ny && [ "$ny" == "y" ] ) && source .venv/bin/activate;'
 alias pushwd='pushd $(${CMD_UTIL_HOME}/bash/wd.sh echo)'
 alias bjob='${CMD_UTIL_HOME}/bash/bjob.sh'
 alias help='less ${CMD_UTIL_HOME}/bash/bash.txt'
 alias ntee='${CMD_UTIL_HOME}/bash/named_tee.sh'
+
+function cwd {
+    command -v deactivate &> /dev/null && deactivate
+    cd $(${CMD_UTIL_HOME}/bash/wd.sh echo)
+    if [ -f .venv/bin/activate ]; then
+        echo -n "Source .venv/bin/activate? (y/[n]): "
+        read ny
+        [ "$ny" == "y" ] && source .venv/bin/activate
+    fi
+}
+export function cwd
 
 # backtracking
 alias b='cd ../'
