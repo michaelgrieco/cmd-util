@@ -14,6 +14,7 @@ alias pushwd='pushd $(${CMD_UTIL_HOME}/bash/wd.sh echo)'
 alias bjob='${CMD_UTIL_HOME}/bash/bjob.sh'
 alias help='less ${CMD_UTIL_HOME}/bash/bash.txt'
 alias ntee='${CMD_UTIL_HOME}/bash/named_tee.sh'
+alias ghit='${CMD_UTIL_HOME}/bash/ghit.sh'
 
 function cwd {
     command -v deactivate &> /dev/null && deactivate

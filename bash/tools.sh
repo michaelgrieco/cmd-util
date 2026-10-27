@@ -148,27 +148,3 @@ function mux {
     fi
 }
 export function mux
-
-#########################
-##### GIT FUNCTIONS #####
-#########################
-
-function git_pull_after_force_push {
-    git fetch --all
-    branch=$(git rev-parse --abbrev-ref HEAD)
-    local_hash=$(git rev-parse HEAD)
-    remote_hash=$(git rev-parse "origin/$branch" 2>/dev/null)
-    if [[ -n "$remote_hash" && "$local_hash" != "$remote_hash" ]]; then
-        git checkout origin/$branch
-        git branch -D $branch
-        git checkout $branch
-    fi
-}
-export function git_pull_after_force_push
-
-function git_rebase_fork {
-    git fetch --all
-    branch=$(git rev-parse --abbrev-ref HEAD)
-    git rebase upstream/$branch
-}
-export function git_rebase_fork
